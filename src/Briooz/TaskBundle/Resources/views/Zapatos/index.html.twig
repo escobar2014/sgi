@@ -1,0 +1,128 @@
+{% extends 'gentelella.html.twig' %}
+{% block body %}
+    <section id="breadcrumb-container">
+        Administracion » <strong>Producto</strong>
+    </section>
+    <section id="titulo-container">
+        <h2>Productos</h2>
+    </section>
+    <section>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><strong>Total de registros: </strong> <span id="total" class="total-items" data-toggle="tooltip" data-placement="top" title="Total de registros"> <span id="total">{{ zapatos.getTotalItemCount}}</span></span></div>
+            <div class="panel-body">
+                <div class="row" style="margin-bottom: 5px;height:40px;">
+                    <div class="col-xs-12">  
+                        <a href="{{path('briooz_zapato_index',{'cat':cat})}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cargar todo"><i class="fas fa-sync"></i> Cargar todo</a>
+                        <a href="{{path('briooz_zapato_add')}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nuevo producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo producto</a>
+                    </div>
+                </div>
+                <div class="progress no-border hidden" id="delete-progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
+                        <span class="sr-only">Eliminando ... </span>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 15px;">
+                    <form action="{{path('briooz_zapato_buscar')}}" method="POST" id="form-busqueda">
+                        <div class="col-xs-12">
+                            <h3>Buscar</h3>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <label>Código Interno<i class="fas fa-sort-down"></i></label>
+                            <input type="text" name="codigo_buscar" id="codigo_buscar" placeholder="Código Interno" class="form-control" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <label>Modelos <i class="fas fa-sort-down"></i></label>
+                            <select name="modelo_buscar" id="modelo_buscar" class="form-control">
+                                <option value="0">[ Modelo ]</option>
+                                {%for modelo in modelos %}
+                                    <option value="{{modelo.id}}">{{modelo.descripcion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <label>Colores <i class="fas fa-sort-down"></i></label>
+                            <select name="color_buscar" id="color_buscar" class="form-control">
+                                <option value="0">[ Color ]</option>
+                                {%for color in colores %}
+                                    <option value="{{color.id}}">{{color.descripcion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <label>Tallas <i class="fas fa-sort-down"></i></label>
+                            <select name="talla_buscar" id="talla_buscar" class="form-control">
+                                <option value="0">[ Talla ]</option>
+                                {%for talla in tallas %}
+                                    <option value="{{talla.id}}">{{talla.descripcion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="col-xs-12" style="text-align:left;margin-top:25px;">
+                            <input type="hidden" name="categoriabuscar" id="categoriabuscar" value="{{cat}}" />
+                            <a href="#" class="btn btn-primary btn-buscar"><i class="fas fa-search"></i> Buscar</a>
+                            <a href="{{path('briooz_zapato_index',{'cat':cat})}}" class="btn btn-success"><i class="fas fa-sync-alt"></i> Todos</a>
+                        </div>
+                    </form>
+                    <div class="progress no-border hidden" id="buscar-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
+                            <span>Buscando ... </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th width="5%">Id</th>
+                                <th width="20%">Código</th>
+                                <th width="20%">Proveedor</th>
+                                <th width="20%">Modelo</th>
+                                <th width="20%" style="text-align: center">Total en stock</th>
+                                <th width="20%"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-hover" id="cuerpo-tabla">
+                            {% set cont = 0 %}
+                            {% for zapato in zapatos %}
+                                {% set tooltext="Tallas disponibles<br/>" %}
+                                {%if tallaspro[zapato.id]!=null%}
+                                    {%for tallapro in tallaspro[zapato.id]%}
+                                        {% set tooltext=tooltext~tallapro.talla.descripcion~": "~tallapro.cantidad~"<br/>" %}
+                                    {%endfor%}
+                                {%endif%}
+                                <tr data-id="{{zapato.id}}">
+                                    <td><a href="{{path('briooz_zapato_edit',{id:zapato.id})}}">{{zapato.id}}</a></td>
+                                    <td><a href="{{path('briooz_zapato_edit',{id:zapato.id})}}">{{zapato.codigoInterno}}</a></td>
+                                    <td>{{zapato.proveedor.empresa}}</td>
+                                    <td>{{zapato.modelo.descripcion}}</td>
+                                    <td style="text-align: center;"><p data-toggle="tooltip" data-placement="top" data-html="true" title="{{tooltext}}" class="p-listado-productos">{{zapato.total}}<p></td>
+                                    <td align="right">
+                                        <a href="{{path('briooz_zapato_ver',{id:zapato.id})}}" class="btn btn-success btn-xs"><i class="far fa-eye"></i></a>
+                                        <a href="{{path('briooz_zapato_edit',{id:zapato.id})}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn-delete btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {# display navigation #}
+                    <div class="navigation">
+                        {{ knp_pagination_render(zapatos) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ include('BrioozTaskBundle:Zapatos:form/form.html.twig',{form:delete_form_ajax,width_submit:false}) }}   
+{% endblock %}
+{% block javascripts %}
+    {{ parent()}}
+    <script src="{{ asset('public/js/delete/zapatos/delete.js')}}"></script>
+    
+    <script>
+        $('.btn-buscar').click(function(e){
+           $('#form-busqueda').submit();
+        });
+        
+    </script>
+{% endblock %}
