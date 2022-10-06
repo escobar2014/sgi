@@ -7,7 +7,7 @@
     "content-hash": "e1f761cdd6bfbb5f4ef8baac8a55137d",
     "packages": [
         {
-            "name": "beberlei/DoctrineExtensions",
+            "name": "beberlei/doctrineextensions",
             "version": "v1.0.15",
             "source": {
                 "type": "git",
@@ -583,6 +583,7 @@
                 "cache",
                 "caching"
             ],
+            "abandoned": true,
             "time": "2016-01-26T17:28:51+00:00"
         },
         {
@@ -1052,12 +1053,12 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Assetic": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-0": {
+                    "Assetic": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1114,12 +1115,12 @@
                 }
             },
             "autoload": {
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ],
                 "psr-4": {
                     "Liuggio\\ExcelBundle\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1439,6 +1440,7 @@
                 "configuration",
                 "distribution"
             ],
+            "abandoned": true,
             "time": "2017-01-04T13:34:44+00:00"
         },
         {
@@ -1553,6 +1555,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
+            "abandoned": "https://github.com/fabpot/local-php-security-checker",
             "time": "2015-11-07T08:07:40+00:00"
         },
         {
@@ -1607,6 +1610,7 @@
                 "mail",
                 "mailer"
             ],
+            "abandoned": "symfony/mailer",
             "time": "2017-02-13T07:52:53+00:00"
         },
         {
@@ -1820,12 +1824,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1909,6 +1913,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
+            "abandoned": "symfony/mailer",
             "time": "2017-03-02T16:47:57+00:00"
         },
         {
@@ -2002,21 +2007,21 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "src/Symfony/Component/Intl/Resources/stubs/functions.php"
+                ],
                 "psr-4": {
-                    "Symfony\\Bridge\\Doctrine\\": "src/Symfony/Bridge/Doctrine/",
-                    "Symfony\\Bridge\\Monolog\\": "src/Symfony/Bridge/Monolog/",
-                    "Symfony\\Bridge\\ProxyManager\\": "src/Symfony/Bridge/ProxyManager/",
-                    "Symfony\\Bridge\\Swiftmailer\\": "src/Symfony/Bridge/Swiftmailer/",
-                    "Symfony\\Bridge\\Twig\\": "src/Symfony/Bridge/Twig/",
                     "Symfony\\Bundle\\": "src/Symfony/Bundle/",
-                    "Symfony\\Component\\": "src/Symfony/Component/"
+                    "Symfony\\Component\\": "src/Symfony/Component/",
+                    "Symfony\\Bridge\\Twig\\": "src/Symfony/Bridge/Twig/",
+                    "Symfony\\Bridge\\Monolog\\": "src/Symfony/Bridge/Monolog/",
+                    "Symfony\\Bridge\\Doctrine\\": "src/Symfony/Bridge/Doctrine/",
+                    "Symfony\\Bridge\\Swiftmailer\\": "src/Symfony/Bridge/Swiftmailer/",
+                    "Symfony\\Bridge\\ProxyManager\\": "src/Symfony/Bridge/ProxyManager/"
                 },
                 "classmap": [
                     "src/Symfony/Component/HttpFoundation/Resources/stubs",
                     "src/Symfony/Component/Intl/Resources/stubs"
-                ],
-                "files": [
-                    "src/Symfony/Component/Intl/Resources/stubs/functions.php"
                 ],
                 "exclude-from-classmap": [
                     "**/Tests/"
@@ -2045,16 +2050,16 @@
         },
         {
             "name": "tecnickcom/tcpdf",
-            "version": "6.2.12",
+            "version": "6.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "2f732eaa91b5665274689b1d40b285a7bacdc37f"
+                "reference": "cc54c1503685e618b23922f53635f46e87653662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/2f732eaa91b5665274689b1d40b285a7bacdc37f",
-                "reference": "2f732eaa91b5665274689b1d40b285a7bacdc37f",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/cc54c1503685e618b23922f53635f46e87653662",
+                "reference": "cc54c1503685e618b23922f53635f46e87653662",
                 "shasum": ""
             },
             "require": {
@@ -2063,7 +2068,6 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "fonts",
                     "config",
                     "include",
                     "tcpdf.php",
@@ -2084,13 +2088,13 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPLv3"
+                "LGPL-3.0-only"
             ],
             "authors": [
                 {
                     "name": "Nicola Asuni",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com"
+                    "role": "lead"
                 }
             ],
             "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
@@ -2104,7 +2108,13 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2015-09-12T10:08:34+00:00"
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&currency_code=GBP&business=paypal@tecnick.com&item_name=donation%20for%20tcpdf%20project",
+                    "type": "custom"
+                }
+            ],
+            "time": "2022-08-12T07:50:54+00:00"
         },
         {
             "name": "twig/twig",
@@ -2174,12 +2184,12 @@
             "target-dir": "WhiteOctober/TCPDFBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/whiteoctober/WhiteOctoberTCPDFBundle.git",
+                "url": "https://github.com/sampart/WhiteOctoberTCPDFBundle.git",
                 "reference": "e134861af736518ca24f4eab69699073460e4c08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberTCPDFBundle/zipball/e134861af736518ca24f4eab69699073460e4c08",
+                "url": "https://api.github.com/repos/sampart/WhiteOctoberTCPDFBundle/zipball/e134861af736518ca24f4eab69699073460e4c08",
                 "reference": "e134861af736518ca24f4eab69699073460e4c08",
                 "shasum": ""
             },
@@ -2210,6 +2220,7 @@
                 "TCPDF",
                 "pdf"
             ],
+            "abandoned": "qipsius/tcpdf-bundle",
             "time": "2015-09-18T08:47:03+00:00"
         }
     ],
@@ -2392,6 +2403,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
+            "abandoned": "symfony/maker-bundle",
             "time": "2015-03-17T06:36:52+00:00"
         },
         {
@@ -2461,5 +2473,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "5.3.9"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
